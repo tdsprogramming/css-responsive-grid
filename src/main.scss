@@ -1,0 +1,40 @@
+@import 'resets.scss';
+
+$num_cols: 12;
+$breakpoints: (
+    'sm': 768px,
+    'md': 992px,
+    'lg': 1200px,
+    'xl': 'last'
+);
+
+$width: 100%/$num_cols;
+.container{
+    display: inline-table;
+    width: 100%;
+
+    .row{
+        display: inline-table;
+        width: 100%;
+
+        @for $_ from 1 through $num_cols{
+            @each $name, $value in $breakpoints{
+                .col-#{$name}-#{$_}{
+                    display: inline-table;
+                    width: $width * $_;
+                }
+                @if $value!='last'{
+                    @media (max-width: #{$value}){
+                        .col-#{$name}-#{$_}{
+                            display: inline-table;
+                            width: 100%;
+                        }
+                    }
+                }
+                @else{
+
+                }
+            }
+        }
+    }
+}
